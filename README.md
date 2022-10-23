@@ -25,3 +25,12 @@ docker run -dp 3306:3306 local-mysql
 ```shell
 pip install -r requirements.txt
 ```
+
+##Run Python
+ 
+* This imports csv of coins you want to follow.  Make sure to edit tradable_coins.csv to follow all of your favorite coins
+
+
+```shell
+python crtbl_coin_list.py 
+```
