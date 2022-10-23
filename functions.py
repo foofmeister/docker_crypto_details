@@ -1,39 +1,48 @@
 import sqlite3
 from sqlite3 import Error
+import os
 
-def create_connection(path):
-    connection = None
+
+def create_connection_mysql():
+    import mysql.connector
+    mydb = None
     try:
-        connection = sqlite3.connect(path)
-        print("Connection to SQLite DB successful")
+        mydb = mysql.connector.connect(
+            host='localhost',
+            user='root',
+            password='password',
+            port='3306',
+            database='DB',
+            autocommit=False
+        )
+        print("Connection to MySQL DB successful")
     except Error as e:
         print(f"The error '{e}' occurred")
+    return mydb
 
-    return connection
 
-connection = create_connection("/home/forest_summers/crypto_stuff/database.db")
+def create_table_connection_mysql():
+    from sqlalchemy import create_engine
+    my_conn = create_engine("mysql+pymysql://root:password@localhost:3306/DB")
+    return my_conn
 
-def execute_query(connection, query):
-    cursor = connection.cursor()
-    try:
-        cursor.execute(query)
-        connection.commit()
-        print("Query executed successfully")
-    except Error as e:
-        print(f"The error '{e}' occurred")
 
-create_users_table = """
-CREATE TABLE IF NOT EXISTS users (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  name TEXT NOT NULL,
-  age INTEGER,
-  gender TEXT,
-  nationality TEXT
-);
-"""
+def twitter_timestamp_to_reg(x):
+    y = x.replace("T"," ")
+    y = y[0:(len(y)-5)]
+    return y
 
-execute_query(connection, create_users_table)
 
-print("forest")
-
+def extract_hashtags(text):
+    text = text.replace('#'," #")
+    text = text.replace('$', " $")
+    text = text.upper()
+    hashtag_list = []
+    for word in text.split():
+        if word[0] == '#':
+            hashtag_list.append(word[1:])
+        if word[0] == '$':
+            hashtag_list.append(word[1:])
+    #print("The hashtags in \"" + text + "\" are :")
+    return hashtag_list
 
