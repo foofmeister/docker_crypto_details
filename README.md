@@ -1,6 +1,6 @@
 # pull_crypto_details
 
-##This is for creating a docker mysql image and then ingesting crypto details
+##This is for creating a docker mysql image and then ingesting crypto details using free coingeck api into a mysql database
 
 ## Build Docker Image
 
@@ -28,7 +28,8 @@ pip install -r requirements.txt
 
 ##Run Python
  
-* This imports csv of coins you want to follow.  Make sure to edit tradable_coins.csv to follow all of your favorite coins
+* builds DB.eligible_coins
+* builds DB.coin_list 
 
 
 ```shell
