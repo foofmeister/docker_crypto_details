@@ -8,14 +8,12 @@ from functions import create_connection_mysql, create_table_connection_mysql
 connection = create_connection_mysql()
 cursor = connection.cursor()
 
+with open("time_data.sql","r") as file:
+    time_data_sql = file.read()
+
 #Pull Records
 df = pd.read_sql_query(
-    "SELECT distinct a.ID from coin_list a \n"
-    "left outer join eligible_coins b on upper(a.SYMBOL) = upper(b.COIN) \n"
-    "left outer join coin_info_ref c on a.ID = c.ID \n"
-    # "inner join TOP_MARKET_CAP tmc on a.ID = tmc.ID \n"
-    "where (b.COIN is not null or PLATFORMS in ('solana')) \n"
-    "and DO_NOT_USE is null", connection)
+    time_data_sql, connection)
 
 #Creating Iteration so we can run smaller amount through api
 df['ITERATION'] = ""
@@ -34,7 +32,7 @@ for index, row in df.iterrows():
 ###------Creating Table to house coin data
 column_names = ['ID', 'usd', 'usd_market_cap', 'usd_24h_vol', 'last_updated_at']
 c = connection.cursor()
-c.execute('CREATE TABLE IF NOT EXISTS db_forest.Time_Data (ID varchar (100) ,usd numeric,usd_market_cap numeric,usd_24h_vol numeric ,last_updated_at numeric)')
+c.execute('CREATE TABLE IF NOT EXISTS DB.Time_Data (ID varchar (100) ,usd numeric,usd_market_cap numeric,usd_24h_vol numeric ,last_updated_at numeric)')
 connection.commit()
 connection.close()
 
