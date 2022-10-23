@@ -23,5 +23,5 @@ docker run -dp 3306:3306 local-mysql
 
 
 ```shell
-pip install -r requirements
+pip install -r requirements.txt
 ```
