@@ -20,10 +20,10 @@ def create_connection_mysql():
         print(f"The error '{e}' occurred")
     return mydb
 
-
 def create_table_connection_mysql():
     from sqlalchemy import create_engine
     my_conn = create_engine("mysql+pymysql://root:password@localhost:3306/DB")
+    my_conn = create_engine("mysql+pymysql://root:password@localhost/DB")
     return my_conn
 
 
