@@ -37,3 +37,9 @@ pip install -r requirements.txt
 ```shell
 python crtbl_coin_list.py 
 ```
+
+```shell
+python crtbl_time_data.py 
+```
+
+* You should now have a table called: DB.Time_Data that has up to date crypto data for solana tokens
