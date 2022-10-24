@@ -2,6 +2,8 @@
 
 ##This is for creating a docker mysql image and then ingesting crypto details using free coingeck api into a mysql database
 
+###This will create a table called: DB.Time_Data that has all of the pertinent details for cryptos that you specify.  It's currently configured only to look at special coins and all solana tokens.  It grabs current time, usd value, usd market value, and usd 24 trading
+
 ## Build Docker Image
 
 * Start Docker Desktop
