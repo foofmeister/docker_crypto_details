@@ -4,6 +4,8 @@ import json
 import pandas as pd
 from functions import create_connection_mysql, create_table_connection_mysql
 
+pd.options.display.float_format = '{:.2f}'.format
+
 #####-----------Create Connection
 connection = create_connection_mysql()
 cursor = connection.cursor()
@@ -32,7 +34,7 @@ for index, row in df.iterrows():
 ###------Creating Table to house coin data
 column_names = ['ID', 'usd', 'usd_market_cap', 'usd_24h_vol', 'last_updated_at']
 c = connection.cursor()
-c.execute('CREATE TABLE IF NOT EXISTS DB.Time_Data (ID varchar (100) ,usd numeric,usd_market_cap numeric,usd_24h_vol numeric ,last_updated_at numeric)')
+c.execute('CREATE TABLE IF NOT EXISTS DB.Time_Data (ID varchar (100) ,usd float,usd_market_cap float,usd_24h_vol float ,last_updated_at numeric)')
 connection.commit()
 connection.close()
 
@@ -73,6 +75,8 @@ while integer < 2:
             except:
                 pass
                 #print(ID + " failed")
+    df2['usd_market_cap'] = df2['usd_market_cap'].astype(float).round(decimals=0)
+    df2['usd_24h_vol'] = df2['usd_24h_vol'].astype(float).round(decimals=0)
     try:
         conn_create_table = create_table_connection_mysql()
         df2.to_sql('Time_Data', conn_create_table, if_exists='append', index=False)
