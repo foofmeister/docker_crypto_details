@@ -33,10 +33,7 @@ for index, row in df.iterrows():
 
 ###------Creating Table to house coin data
 column_names = ['ID', 'usd', 'usd_market_cap', 'usd_24h_vol', 'last_updated_at']
-c = connection.cursor()
-c.execute('CREATE TABLE IF NOT EXISTS DB.Time_Data (ID varchar (100) ,usd float,usd_market_cap float,usd_24h_vol float ,last_updated_at numeric)')
-connection.commit()
-connection.close()
+
 
 
 ###------Build second data frame, begin infinite loop
