@@ -20,3 +20,19 @@ df = pd.read_sql_query(
 
 
 #https://api.coingecko.com/api/v3/coins/superbonds/ohlc?vs_currency=usd&days=365
+
+import time
+import datetime
+
+yesterday = datetime.date.today() - datetime.timedelta(365)
+unix_time= yesterday.strftime("%s") #Second as a decimal number [00,61] (or Unix Timestamp)
+
+
+RightNow = time.time()
+
+from pycoingecko import CoinGeckoAPI
+cg = CoinGeckoAPI()
+
+cg.get_coin_market_chart_range_by_id(id=['superbonds'],vs_currency='usd', from_timestamp=unix_time,to_timestamp=RightNow)
+
+a
