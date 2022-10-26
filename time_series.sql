@@ -1,0 +1,1 @@
+select * from DB.eligible_coins
