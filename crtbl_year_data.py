@@ -1,8 +1,9 @@
 import time
-import requests
-import json
 import pandas as pd
 from functions import create_connection_mysql, create_table_connection_mysql
+import datetime
+from pycoingecko import CoinGeckoAPI
+cg = CoinGeckoAPI()
 
 pd.options.display.float_format = '{:.2f}'.format
 
@@ -17,22 +18,20 @@ with open("time_series.sql","r") as file:
 df = pd.read_sql_query(
     time_data_sql, connection)
 
-
-
 #https://api.coingecko.com/api/v3/coins/superbonds/ohlc?vs_currency=usd&days=365
-
-import time
-import datetime
-
-yesterday = datetime.date.today() - datetime.timedelta(365)
-unix_time= yesterday.strftime("%s") #Second as a decimal number [00,61] (or Unix Timestamp)
+YesterYear = datetime.date.today() - datetime.timedelta(365)
+YesterYear= YesterYear.strftime("%s") #Second as a decimal number [00,61] (or Unix Timestamp)
 
 
 RightNow = time.time()
 
-from pycoingecko import CoinGeckoAPI
-cg = CoinGeckoAPI()
 
-cg.get_coin_market_chart_range_by_id(id=['superbonds'],vs_currency='usd', from_timestamp=unix_time,to_timestamp=RightNow)
 
-a
+for i in range(len(df)):
+for i in range(1):
+    ID = df.iloc[i]['ID']
+    SYMBOL = df.iloc[i]['SYMBOL']
+    NAME = df.iloc[i]['NAME']
+    PLATFORMS = df.iloc[i]['PLATFORMS']
+    PLATFORM_HASH = df.iloc[i]['PLATFORM_HASH']
+    CHART = cg.get_coin_market_chart_range_by_id(id=ID, vs_currency='usd', from_timestamp=YesterYear, to_timestamp=RightNow)

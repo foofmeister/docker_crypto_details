@@ -1,1 +1,1 @@
-select * from DB.eligible_coins
+select * from DB.coin_list
