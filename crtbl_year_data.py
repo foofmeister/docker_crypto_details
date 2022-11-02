@@ -21,13 +21,11 @@ df = pd.read_sql_query(
 #https://api.coingecko.com/api/v3/coins/superbonds/ohlc?vs_currency=usd&days=365
 YesterYear = datetime.date.today() - datetime.timedelta(365)
 YesterYear= YesterYear.strftime("%s") #Second as a decimal number [00,61] (or Unix Timestamp)
-
-
 RightNow = time.time()
 
 
 
-for i in range(len(df)):
+#for i in range(len(df)):
 for i in range(1):
     ID = df.iloc[i]['ID']
     SYMBOL = df.iloc[i]['SYMBOL']
@@ -35,3 +33,13 @@ for i in range(1):
     PLATFORMS = df.iloc[i]['PLATFORMS']
     PLATFORM_HASH = df.iloc[i]['PLATFORM_HASH']
     CHART = cg.get_coin_market_chart_range_by_id(id=ID, vs_currency='usd', from_timestamp=YesterYear, to_timestamp=RightNow)
+    type_iteration = [x for x in CHART]
+    for j in type_iteration:
+        print(j)
+        CHART[type_iteration]
+
+    for j in CHART:
+        print(CHART[j])
+        printx = CHART['prices']
+    "insert into Crypto_Year_Price"
+
