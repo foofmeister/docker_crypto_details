@@ -19,13 +19,13 @@ CREATE TABLE IF NOT EXISTS `Time_Data` (
 
 CREATE TABLE IF NOT EXISTS `Crypto_Year_Price` (
 `ID` varchar (100) ,
-`symbol` varchar(100),
-`name` varchar (255) ,
-`platforms` varchar (255)  ,
-`platform_hash` varchar(255),
-`type` varchar(255),
-`timestamp` varchar(255),
-`value` float,
+`SYMBOL` varchar(100),
+`NAME` varchar (255) ,
+`PLATFORMS` varchar (255)  ,
+`PLATFORM_HASH` varchar(255),
+`TYPE` varchar(255),
+`TIMESTAMP` varchar(255),
+`VALUE` float,
 );
 
 

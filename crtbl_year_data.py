@@ -41,7 +41,10 @@ for i in range(1):
         for k in TYPE_CHART:
             TIME_STAMP = k[0]
             VALUE = k[0]
-            sql = "insert into Crypto_Year_Price ( values"
+            sql = "insert into Crypto_Year_Price ( VALUE, ID, ,SYMBOL, NAME, PLATFORMS, PLATFORM_HASH, TYPE, TIMESTAMP)"\
+                  " "
+
+
 
 
 
