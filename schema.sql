@@ -25,8 +25,7 @@ CREATE TABLE IF NOT EXISTS `Crypto_Year_Price` (
 `PLATFORM_HASH` varchar(255),
 `TYPE` varchar(255),
 `TIMESTAMP` varchar(255),
-`VALUE` float,
-);
+`VALUE` float);
 
 
 

@@ -40,30 +40,11 @@ for i in range(1):
         TYPE_CHART = CHART[j]
         for k in TYPE_CHART:
             TIME_STAMP = k[0]
-            VALUE = k[0]
+            VALUE = k[1]
             sql = "insert into Crypto_Year_Price ( VALUE, ID, ,SYMBOL, NAME, PLATFORMS, PLATFORM_HASH, TYPE, TIMESTAMP)"\
-                  " "
-
-
-
-
-
-    for j in CHART:
-        print(CHART[j])
-        printx = CHART['prices']
-    "insert into Crypto_Year_Price" \
-            `ID`
-    `symbol`
-    `name`
-    `platforms`
-    varchar(255),
-    `platform_hash`
-    varchar(255),
-    `type`
-    varchar(255),
-    `timestamp`
-    varchar(255),
-    `value`
-    float,
-    );
+                  " values( '"+str(VALUE)+"','"+ID+"','"+SYMBOL+"','"+NAME+"','"+PLATFORMS+"','"+PLATFORM_HASH+"','"+TYPE+"','"+str(TIME_STAMP)+"')"
+            cursor.execute(sql)
+            connection.commit()
+cursor.close()
+connection.close()
 
