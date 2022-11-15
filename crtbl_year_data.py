@@ -25,26 +25,34 @@ RightNow = time.time()
 
 df_insert = pd.DataFrame(columns=['ID','SYMBOL','NAME','PLATFORMS','PLATFORM_HASH','TYPE','TIMEPSTAMP','VALUE'])
 
-#for i in range(len(df)):
-for i in range(1):
+print(len(df))
+
+
+for i in range(len(df)):
+#for i in range(1):
+    print(i)
     ID = df.iloc[i]['ID']
     SYMBOL = df.iloc[i]['SYMBOL']
     NAME = df.iloc[i]['NAME']
     PLATFORMS = df.iloc[i]['PLATFORMS']
     PLATFORM_HASH = df.iloc[i]['PLATFORM_HASH']
-    CHART = cg.get_coin_market_chart_range_by_id(id=ID, vs_currency='usd', from_timestamp=YesterYear, to_timestamp=RightNow)
-    #Gather different types of informatin (prices,market_caps, and total_volumes)
-    type_aggregate = [x for x in CHART]
-    for j in type_aggregate:
-        TYPE = j
-        TYPE_CHART = CHART[j]
-        for k in TYPE_CHART:
-            TIME_STAMP = k[0]
-            VALUE = k[1]
-            sql = "insert into Crypto_Year_Price ( VALUE, ID, ,SYMBOL, NAME, PLATFORMS, PLATFORM_HASH, TYPE, TIMESTAMP)"\
-                  " values( '"+str(VALUE)+"','"+ID+"','"+SYMBOL+"','"+NAME+"','"+PLATFORMS+"','"+PLATFORM_HASH+"','"+TYPE+"','"+str(TIME_STAMP)+"')"
-            cursor.execute(sql)
-            connection.commit()
+    try:
+        CHART = cg.get_coin_market_chart_range_by_id(id=ID, vs_currency='usd', from_timestamp=YesterYear, to_timestamp=RightNow)
+        #Gather different types of informatin (prices,market_caps, and total_volumes)
+        type_aggregate = [x for x in CHART]
+        for j in type_aggregate:
+            TYPE = j
+            TYPE_CHART = CHART[j]
+            for k in TYPE_CHART:
+                TIME_STAMP = k[0]
+                VALUE = k[1]
+                sql = "insert into Crypto_Year_Price ( VALUE, ID, SYMBOL, NAME, PLATFORMS, PLATFORM_HASH, TYPE, TIMESTAMP)"\
+                      " values( '"+str(VALUE)+"','"+ID+"','"+SYMBOL+"','"+NAME+"','"+PLATFORMS+"','"+PLATFORM_HASH+"','"+TYPE+"','"+str(TIME_STAMP)+"')"
+                cursor.execute(sql)
+                connection.commit()
+        time.sleep(1)
+    except:
+        pass
 cursor.close()
 connection.close()
 

@@ -27,5 +27,9 @@ CREATE TABLE IF NOT EXISTS `Crypto_Year_Price` (
 `TIMESTAMP` varchar(255),
 `VALUE` float);
 
+drop view if exists  DB.V_Crypto_Year_Price;
 
+create view DB.V_Crypto_Year_Price as
+select distinct FROM_UNIXTIME(TIMESTAMP/1000) TIMESTAMP, NAME, SYMBOL, PLATFORMS, PLATFORM_HASH, TYPE, VALUE
+from DB.Crypto_Year_Price;
 
